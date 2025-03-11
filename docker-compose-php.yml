@@ -1,0 +1,28 @@
+networks:
+  propel-test-net:
+
+services:
+  propel-test:
+    build:
+      context: .
+      dockerfile: ./php-container-setup/Dockerfile
+    container_name: 'propel-test-php'
+    stop_grace_period: 1s
+    environment:
+      DB_HOSTNAME: db_server
+      DB_USER: propel
+      DB_PW: propel
+      DB_NAME: propel
+      ALLOW_TESTS_AS_ROOT: 1
+    command: bash
+    tty: true
+    volumes:
+      - ../Propel2:/propel
+      - /propel/vendor
+    extra_hosts:
+    - "host.ip:${HOST_IP:-host-gateway}"
+    depends_on:
+      db_server:
+        condition: service_healthy
+    networks:
+      - propel-test-net

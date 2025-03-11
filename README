@@ -1,0 +1,5 @@
+1. Run Propel with MySQL:
+` docker compose -f docker-compose-mysql.yml -f docker-compose-php.yml up`
+
+2. Run Propel with Postgres:
+` docker compose -f docker-compose-postgres.yml -f docker-compose-php.yml up`

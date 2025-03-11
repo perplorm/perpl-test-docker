@@ -1,0 +1,23 @@
+services:
+  db_server:
+    image: mysql
+    container_name: 'propel-test-mysql'
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: propel
+      MYSQL_USER: propel
+      MYSQL_PASSWORD: propel
+      MYSQL_DATABASE: propel
+    volumes:
+      - ./mysql-container-setup/mysql.setup.sql:/docker-entrypoint-initdb.d/init.sql
+    command: [
+      'mysqld', 
+      '--character-set-server=utf8mb4', 
+      '--collation-server=utf8mb4_unicode_ci'
+    ]
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      retries: 5
+    networks:
+      - propel-test-net

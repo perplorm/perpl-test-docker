@@ -1,0 +1,3 @@
+alias propel-mysql="mysql -h db_server -u propel -ppropel propel"
+alias propel="/propel/bin/propel"
+alias propel-build-model-mysql="propel test:prepare --vendor=mysql --dsn='mysql:host=db_server;port=3306;dbname=propel' --user=propel --password=propel --exclude-database"
