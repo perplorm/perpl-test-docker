@@ -1,5 +1,60 @@
-1. Run Propel with MySQL:
-` docker compose -f docker-compose-mysql.yml -f docker-compose-php.yml up`
+## Startup
+- run with MySql:
+```bash
+docker compose -f docker-compose-mysql.yml -f docker-compose-php.yml up`
+```
+- run with Postgres:
+```bash
+docker compose -f docker-compose-postgres.yml -f docker-compose-php.yml up
+```
 
-2. Run Propel with Postgres:
-` docker compose -f docker-compose-postgres.yml -f docker-compose-php.yml up`
+- run with both Postgres & MySql:
+```bash
+docker compose -f docker-compose-postgres.yml -f docker-compose-mysql.yml -f docker-compose-php.yml up`
+```
+- XDebug in rootless mode requires to set HOST_IP env var
+```bash
+HOST_IP=$(hostname -I | cut -d ' ' -f1) docker compose ...
+```
+## Exec into container
+```bash
+docker exec -it propel-test-php /bin/bash
+```
+
+## Setup
+- install dependencies
+```bash
+composer update
+```
+- setup database and build fixtures
+```
+init-mysql
+init-postgres
+init-sqlite
+```
+
+## Run tests
+```bash
+testagnostic
+testmysql
+testpostgres
+testsqlite
+```
+
+## Code style and static analysis
+
+```bash
+stan
+psalm
+lint-clean
+lint
+```
+- on edited files only (`git add` new files before running)
+```
+stan-edited
+lint-clean-edited
+lint-edited
+```
+## Other aliases
+
+To find out about other aliases, enter `aliases` or check `/root/bash_aliases`
