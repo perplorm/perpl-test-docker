@@ -11,6 +11,7 @@ RUN apt-get update \
         libxml2-dev \
         libzip-dev \
         sqlite3 \
+        unzip \
 \
  && pecl install xdebug \
  && docker-php-ext-enable xdebug \

@@ -1,4 +1,17 @@
+## Environment Variables
+
+| Variable | Description |
+|---|---|
+| `PERPL_HOME` | Path to Perpl repo, will be mounted at same location in the container and set as workdir. | `/home/me/repos/Perpl`
+| `HOST_IP` | IP address of host for XDebug |
+
+
+Note: When running Docker in rootless mode, host is accessed from container using host external network IP:
+```bash
+HOST_IP=$(hostname -I | cut -d ' ' -f1) docker compose ...
+```
 ## Startup
+
 - run with MySql:
 ```bash
 docker compose -f docker-compose-mysql.yml -f docker-compose-php.yml up`
@@ -11,10 +24,6 @@ docker compose -f docker-compose-postgres.yml -f docker-compose-php.yml up
 - run with both Postgres & MySql:
 ```bash
 docker compose -f docker-compose-postgres.yml -f docker-compose-mysql.yml -f docker-compose-php.yml up`
-```
-- XDebug in rootless mode requires to set HOST_IP env var
-```bash
-HOST_IP=$(hostname -I | cut -d ' ' -f1) docker compose ...
 ```
 ## Exec into container
 ```bash
@@ -58,3 +67,17 @@ lint-edited
 ## Other aliases
 
 To find out about other aliases, enter `aliases` or check `/root/bash_aliases`
+
+## XDebug Server Configuration
+
+Example configuration (VSCode, Docker in rootless mode): 
+```json
+    "configurations": [
+        {
+            "name": "...",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "hostname": "0.0.0.0",
+        },
+```

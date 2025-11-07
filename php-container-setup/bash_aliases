@@ -25,10 +25,17 @@ alias lint="perpl-composer run-script cs-check"
 alias lint-clean="perpl-composer run-script cs-fix"
 alias lint-edited="perpl-composer run-script cs-check -- \$(git --git-dir='$PERPL_HOME/.git' diff --diff-filter=AM --name-only HEAD src/)"
 alias lint-clean-edited="perpl-composer run-script cs-fix -- \$(git --git-dir='$PERPL_HOME/.git' diff --diff-filter=AM --name-only HEAD src/)"
+alias lint-objects="perpl-composer cs-check tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*[^Query].php"
+alias lint-queries="perpl-composer cs-check tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*Query.php"
+
 alias stan="'$PERPL_HOME/vendor/bin/phpstan' analyse --configuration '$PERPL_HOME/phpstan.neon'"
 alias stan-edited="stan \$(git --git-dir='$PERPL_HOME/.git' diff --name-only HEAD src/)"
+alias stan-objects="stan -a autoload.php.dist $PERPL_HOME/tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*[^Query].php"
+alias stan-queries="stan -a autoload.php.dist $PERPL_HOME/tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*Query.php"
+
 alias psalm="'$PERPL_HOME/vendor/psalm/phar/psalm.phar'"
 alias psalm-baseline="psalm --set-baseline='$PERPL_HOME/psalm-baseline.xml'"
+
 alias fullcheck="stan && psalm"
 
 alias xdebug_cli='export XDEBUG_CONFIG="idekey=VSCODE"' # might already be enabled in docker compose

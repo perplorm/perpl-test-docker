@@ -14,11 +14,16 @@ services:
       DB_PW: propel
       DB_NAME: propel
       ALLOW_TESTS_AS_ROOT: 1
+      XDEBUG_CONFIG: "idekey=VSCODE"
+      PERPL_HOME: ${PERPL_HOME}
     command: bash
     tty: true
     volumes:
-      - ../Propel2:/propel
+      - ${PERPL_HOME}:${PERPL_HOME}
       - /propel/vendor
+      - /tmp/propelQuickBuild-2.0.0-dev-cd848e09f2/:/tmp/propelQuickBuild-2.0.0-dev-cd848e09f2/
+    working_dir:
+      ${PERPL_HOME}
     extra_hosts:
     - "host.ip:${HOST_IP:-host-gateway}"
     depends_on:
