@@ -1,4 +1,16 @@
+# Perpl Test Docker Environment
+
+Run Perpl tests with Docker.
+
+Mount your Perpl directory into a PHP container and run static analysis, linters, or tests, typically using another container running MySql or Postgres.
+
+## Installation
+
+Checkout repository and cd into directory.
+
 ## Environment Variables
+
+Communication between host and container is configured through environment variables:
 
 | Variable | Description |
 |---|---|
@@ -6,15 +18,16 @@
 | `HOST_IP` | IP address of host for XDebug |
 
 
-Note: When running Docker in rootless mode, host is accessed from container using host external network IP:
+Note: When running Docker in rootless mode, host is accessed from container using host's external network IP:
 ```bash
 HOST_IP=$(hostname -I | cut -d ' ' -f1) docker compose ...
 ```
-## Startup
+When host's external network IP changes, restart the container.
+## Run containers
 
 - run with MySql:
 ```bash
-docker compose -f docker-compose-mysql.yml -f docker-compose-php.yml up`
+docker compose -f docker-compose-mysql.yml -f docker-compose-php.yml up
 ```
 - run with Postgres:
 ```bash
@@ -23,14 +36,17 @@ docker compose -f docker-compose-postgres.yml -f docker-compose-php.yml up
 
 - run with both Postgres & MySql:
 ```bash
-docker compose -f docker-compose-postgres.yml -f docker-compose-mysql.yml -f docker-compose-php.yml up`
+docker compose -f docker-compose-postgres.yml -f docker-compose-mysql.yml -f docker-compose-php.yml up
 ```
 ## Exec into container
 ```bash
 docker exec -it propel-test-php /bin/bash
 ```
 
-## Setup
+## Set up environment
+
+Note that composer libraries and test schema classes are installed into the Perpl folder mounted from host, same as running the commands directly in host.
+
 - install dependencies
 ```bash
 composer update
@@ -41,6 +57,8 @@ init-mysql
 init-postgres
 init-sqlite
 ```
+
+
 
 ## Run tests
 ```bash
@@ -81,3 +99,7 @@ Example configuration (VSCode, Docker in rootless mode):
             "hostname": "0.0.0.0",
         },
 ```
+
+## Help & Support
+
+Developed on Linux with rootless docker. If you run into issues or find this documentation could have made things easier, please open an issue or create a PR.
