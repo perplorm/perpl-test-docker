@@ -7,13 +7,14 @@ RUN apt-get update \
         default-mysql-client \
         sqlite3 \
         git \
+        libicu-dev \
         libpq-dev \
         libxml2-dev \
         libzip-dev \
         sqlite3 \
-        unzip \
-\
- && pecl install xdebug \
+        unzip
+
+RUN pecl install xdebug \
  && docker-php-ext-enable xdebug \
  && docker-php-ext-install \
     intl xml zip \
