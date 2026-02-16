@@ -10,6 +10,8 @@ services:
       MYSQL_DATABASE: propel
     volumes:
       - ./mysql-container-setup/mysql.setup.sql:/docker-entrypoint-initdb.d/init.sql
+    tmpfs:
+      - /var/lib/mysql/:rw,noexec,nosuid
     command: [
       'mysqld', 
       '--character-set-server=utf8mb4', 
