@@ -21,7 +21,7 @@ services:
     volumes:
       - ${PERPL_HOME}:${PERPL_HOME}
       - /propel/vendor
-      - /tmp/perp-QuickBuild-cd848e09f2/:/tmp/perp-QuickBuild-cd848e09f2/
+      - /tmp/perplQuickBuild/:/tmp/perplQuickBuild/
     working_dir:
       ${PERPL_HOME}
     extra_hosts:
