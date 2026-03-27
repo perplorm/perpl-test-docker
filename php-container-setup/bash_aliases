@@ -9,6 +9,8 @@ alias fixtures-mysql="perpl test:prepare --vendor=mysql --dsn='mysql:host=db_ser
 alias fixtures-postgres="perpl test:prepare --vendor=pgsql --dsn='pgsql:host=db_server;port=5432;dbname=propel' --user=propel --password=propel --exclude-database"
 alias fixtures-sqlite="perpl test:prepare --vendor=sqlite --dsn='sqlite:$PERPL_HOME/tests/test.sq3' --exclude-database"
 
+alias rebuild-references="$PERPL_HOME/tests/bin/rebuild-reference-files"
+
 alias init-mysql="'$PERPL_HOME/tests/bin/setup.mysql.sh'"
 alias init-postgres="'$PERPL_HOME/tests/bin/setup.pgsql.sh'"
 alias init-sqlite="'$PERPL_HOME/tests/bin/setup.sqlite.sh'"
