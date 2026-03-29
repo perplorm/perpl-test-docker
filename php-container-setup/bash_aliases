@@ -1,4 +1,5 @@
 alias mysql-perpl="mysql --ssl-verify-server-cert=false -h db_server -u propel -ppropel propel"
+alias psql-perpl="PGPASSWORD=propel psql -h db_server -U propel propel"
 
 alias perpl="'$PERPL_HOME/bin/propel'"
 alias perpl-composer="composer --working-dir='$PERPL_HOME'"
@@ -27,13 +28,15 @@ alias lint="perpl-composer run-script cs-check"
 alias lint-clean="perpl-composer run-script cs-fix"
 alias lint-edited="perpl-composer run-script cs-check -- \$(git --git-dir='$PERPL_HOME/.git' diff --diff-filter=AM --name-only HEAD src/)"
 alias lint-clean-edited="perpl-composer run-script cs-fix -- \$(git --git-dir='$PERPL_HOME/.git' diff --diff-filter=AM --name-only HEAD src/)"
-alias lint-objects="perpl-composer cs-check tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*[^Query].php"
-alias lint-queries="perpl-composer cs-check tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*Query.php"
+alias lint-objects="perpl-composer cs-check -- --exclude=SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*[^Query].php"
+alias lint-queries="perpl-composer cs-check -- --exclude=SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*Query.php"
+alias lint-tablemaps="perpl-composer cs-check -- --exclude=SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Map/"
 
 alias stan="'$PERPL_HOME/vendor/bin/phpstan' analyse --configuration '$PERPL_HOME/phpstan.neon'"
 alias stan-edited="stan \$(git --git-dir='$PERPL_HOME/.git' diff --name-only HEAD src/)"
 alias stan-objects="stan -a autoload.php.dist $PERPL_HOME/tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*[^Query].php"
 alias stan-queries="stan -a autoload.php.dist $PERPL_HOME/tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Base/*Query.php"
+alias stan-tablemaps="stan  -a autoload.php.dist /home/bl1rt/Public/repos/perpl/perpl/tests/Fixtures/bookstore/build/classes/Propel/Tests/Bookstore/Map/"
 
 alias psalm="'$PERPL_HOME/vendor/psalm/phar/psalm.phar'"
 alias psalm-baseline="psalm --set-baseline='$PERPL_HOME/psalm-baseline.xml'"
